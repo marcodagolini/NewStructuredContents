@@ -157,7 +157,13 @@ function openContent(evt, contentType) {
       var Longitude = "";
       var FreeTextMap = $( "#FreeTextMap" ).val();
       
-      var DataMap = {
+      
+      
+	    
+
+      $(document).on('click', function(evt) {
+          if($(evt.target).is('#sendMap')) {
+		  var DataMap = {
 	"type": "vertical",
 	"elements": [{
 			"type": "map",
@@ -180,11 +186,6 @@ function openContent(evt, contentType) {
 		}
 	]
 };
-      
-	    
-
-      $(document).on('click', function(evt) {
-          if($(evt.target).is('#sendMap')) {
                alert(JSON.stringify(DataMap));
           }
       });
