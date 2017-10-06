@@ -153,10 +153,16 @@ function openContent(evt, contentType) {
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+      
+      $("document").ready(function() {
+          setTimeout(function() {
+             $(".tabMap").trigger('click');
+          },10);
+      });
+      
       function initAutocomplete() {
         
-        $(document).on('click', function(evt) {
-           if($(evt.target).is('.tabMap')) {
+        
            
         
         
@@ -229,8 +235,7 @@ function openContent(evt, contentType) {
           map.fitBounds(bounds);
         });
              
-             }
-        });
+       
       }
       
       
