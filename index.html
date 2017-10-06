@@ -215,11 +215,12 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          InterceptedLat = event.latLng;
-		alert(InterceptedLat);
+          InterceptedLat = event.latLng.lat;
+		
           InterceptedLong = event.latLng.lng
           $('#Latitude').val(InterceptedLat);
           $('#Longitude').val(InterceptedLong);
+		alert(InterceptedLat);
             alert(JSON.stringify(event));
        });
         
