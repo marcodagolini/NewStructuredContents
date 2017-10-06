@@ -153,12 +153,41 @@ function openContent(evt, contentType) {
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+      var Latitude = "";
+      var Longitude = "";
+      
+      var DataMap = {
+	"type": "vertical",
+	"elements": [{
+			"type": "map",
+			"lo": Longitude,
+			"la": Latitude,
+			"click": {
+				"actions": [{
+					"type": "navigate",
+					"lo": Longitude,
+					"la": Latitude
+				}]
+			},
+			"tooltip": "map tooltip"
+		},
+		{
+			"type": "text",
+			"text": "This is an example for text element",
+			"tooltip": "text tooltip",
+			"rtl": true
+		}
+	]
+};
+      
       
       $("document").ready(function() {
           setTimeout(function() {
              $(".tabMap").trigger('click');
           },10);
       });
+      
+     
       
       function initAutocomplete() {
         
@@ -173,8 +202,10 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          $('#Latitude').val(event.latLng.lat);
-          $('#Longitude').val(event.latLng.lng);
+          Latitude = event.latLng.lat;
+          Longitude = event.latLng.lng
+          $('#Latitude').val(Latitude);
+          $('#Longitude').val(Longitude);
             // alert(JSON.stringify(event));
        });
         
