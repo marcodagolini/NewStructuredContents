@@ -166,39 +166,88 @@ function openContent(evt, contentType) {
       
 	    
 
-      $(document).on('click', function(evt) {
+     $(document).on('click', function(evt) {
           if($(evt.target).is('#sendMap')) {
 		  var FreeTextMap = $( "#FreeTextMap" ).val();
 		  InterceptedLat = $( "#Latitude" ).val();
 		  InterceptedLong = $( "#Longitude" ).val();
 		  alert(InterceptedLat);
 		  var DataMap = {
+			"type": "vertical",
+			"elements": [{
+				"type": "map",
+				"lo": InterceptedLat,
+				"la": InterceptedLong,
+				"click": {
+					"actions": [{
+						"type": "navigate",
+						"lo": InterceptedLat,
+						"la": InterceptedLong
+					}]
+				},
+				"tooltip": "map tooltip"
+			},
+			{
+				"type": "text",
+				"text": FreeTextMap,
+				"tooltip": "text tooltip",
+				"rtl": true
+			}
+		]};
+		  // alert(JSON.stringify(DataMap));
+        }
+    });
+	    
+	    
+	$(document).on('click', function(evt) {
+          if($(evt.target).is('#sendCard')) {
+		  var ImageCard = $( "#ImageCard" ).val();
+		  var URLCard = $( "#URLCard" ).val();
+		  var FreeTextCard = $( "#FreeTextCard" ).val();
+		  var DataCard = {
 	"type": "vertical",
 	"elements": [{
-			"type": "map",
-			"lo": InterceptedLat,
-			"la": InterceptedLong,
-			"click": {
-				"actions": [{
-					"type": "navigate",
-					"lo": InterceptedLat,
-					"la": InterceptedLong
-				}]
-			},
-			"tooltip": "map tooltip"
+			"type": "image",
+			"url": "http://cdn.bgr.com/2016/08/iphone-8-concept.jpg",
+			"tooltip": "image tooltip"
 		},
 		{
 			"type": "text",
-			"text": FreeTextMap,
-			"tooltip": "text tooltip",
-			"rtl": true
+			"text": "IPhone 8",
+			"tooltip": "brand new iphone 8",
+			"style": {
+				"bold": true,
+				"size": "large"
+			}
+		},
+		{
+			"type": "button",
+			"title": "Go to the page",
+			"click": {
+				"actions": [{
+					"type": "link",
+					"id": "febf3237-f7d9-44bc-a17f-fc8abdfb0f25",
+					"name": "add to cart",
+					"uri": "http://www.google.com"
+				}]
+			}
 		}
 	]
-};
-               alert(JSON.stringify(DataMap));
-          }
-      });
+}
+		  // alert(JSON.stringify(DataMap));
+        }
+    });
       
+	    
+	    
+	    
+	
+	    
+	    
+	    
+	    
+	    
+	    
       $("document").ready(function() {
           setTimeout(function() {
              $(".tabMap").trigger('click');
@@ -324,13 +373,13 @@ function openContent(evt, contentType) {
 <div id="Card" class="tabcontent">
   <form>
   Image:<br>
-  <input type="text" name="ImageCard">
+  <input id="ImageCard" type="text" name="ImageCard">
   <br>
   URL:<br>
-  <input type="text" name="URLCard">
+  <input id="URLCard" type="text" name="URLCard">
     <br>
   FreeText:<br>
-  <input type="text" name="FreeTextCard">
+  <input id="FreeTextCard" type="text" name="FreeTextCard">
 </form>
 	<button id="sendCard" type="button">Send</button> 
 </div>
