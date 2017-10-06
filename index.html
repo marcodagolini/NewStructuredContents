@@ -12,56 +12,88 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      html, body, #map {
-         height: 280px;
-         width: 280px;
-         margin: 0px;
-         padding: 0px
-      }
-      #description {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-      }
+     body
+{
+ background-color:#f0f0f0;
+ margin:0px auto;
+ padding:0px;
+ font-family:helvetica;
+ height:2000px;
+}
+h1
+{
+ text-align:relative;
+ font-weight: 200;
+ font-size:35px;
+ margin-top:20px;
+ margin-left:10px;
+ color:#1e90ff;
+}
+h1 p
+{
+ text-align:center;
+ margin:0px;
+ font-size:18px;
+ text-decoration:underline;
+ color:white;
+}
+h2 {
+font-weight: 300;
+}
+#main_content
+{
+ margin-top:50px;
+ width:500px;
+ margin-left:10px;
+}
+#main_content li
+{
+ display:inline;
+ list-style-type:none;
+ background-color:#1e90ff;
+ padding:10px;
+ border-radius:5px 5px 0px 0px;
+ font-weight: 300;
+ color:#292A0A;
+ cursor:pointer;
+}
+#main_content li.notselected
+{
+ background-color:#1e90ff;
+ color:#292A0A;
+}
+#main_content li.selected
+{
+ background-color:#ddd;
+ color:#292A0A;
+}
+#main_content .hidden_desc
+{
+ display:none;
+ visibility:hidden;
+}
+#main_content #page_content
+{
+ background-color:#ddd;
+ padding:10px;
+ margin-top:10px;
+ border-radius:0px 5px 5px 5px;
+ color:#292A0A;
+ line-height: 1.6em;
+ word-spacing:4px;
+ font-weight: 300;
+}
 
-      #infowindow-content .title {
-        font-weight: bold;
-      }
+.generate
+{
+  padding: 10px;
 
-      #infowindow-content {
-        display: none;
-      }
-
-      #map #infowindow-content {
-        display: inline;
-      }
-
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
-
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
-
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
-
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
+  border-radius: 0px 0px 5px 5px;
+  font-weight: 200;
+  position: relative;
+  background-color:#ccc;
+  cursor: pointer;
+}
 
       #pac-input {
         background-color: #fff;
@@ -75,57 +107,7 @@
         width: 120px;
       }
 
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-      #target {
-        width: 345px;
-      }
-      div.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-div.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    height: 500px;
-    width: 320px;
-    border: 1px solid #ccc;
-    border-top: none;
-}
+     
     </style>
     
     
@@ -385,7 +367,93 @@ function openContent(evt, contentType) {
   </head>
   <body>
     
-    <p>Build your structured content:</p>
+    <h1>Build your structured content:</h1>
+	  
+	  
+	  
+	  <div id="main_content">
+
+
+ <li class="nonselected" id="page1" onclick="change_tab(this.id);">Map</li>
+ <li class="notselected" id="page2" onclick="change_tab(this.id);">Card</li>
+ <li class="notselected" id="page3" onclick="change_tab(this.id);">Video</li>
+ 
+
+
+ <div class='hidden_desc' id="page1_desc">
+   <h2>Google Map</h2>
+   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+  <form>
+  Latitude:<br>
+  <input id="Latitude" type="text" name="Latitude">
+  <br>
+  Longitude:<br>
+  <input id="Longitude" type="text" name="Longitude">
+    <br>
+  FreeText:<br>
+  <input id="FreeTextMap" type="text" name="FreeTextMap">
+</form>
+	 <button id="sendMap" class="generate" type="button">Generate Code</button> 
+
+
+ </div>
+
+ <div class='hidden_desc' id="page2_desc">
+  <h2>Card</h2>
+  <form>
+  Image:<br>
+  <input id="ImageCard" type="text" name="ImageCard">
+  <br>
+  FreeText:<br>
+  <input id="FreeTextCard" type="text" name="FreeTextCard">
+  <br>
+  FreeTextToURL:<br>
+  <input id="FreeTextToURL" type="text" name="FreeTextToURL">
+  <br>
+  URL:<br>
+  <input id="URLCard" type="text" name="URLCard">
+    <br>
+  
+</form>
+	<button id="sendCard" class="generate" type="button">Send</button> 
+ </div>
+
+ <div class='hidden_desc' id="page3_desc">
+  <h2>Video</h2>
+  <form>
+  URLImage:<br>
+  <input id="URLImage" type="text" name="URLImage">
+  <br>
+  URLVideo:<br>
+  <input id="URLVideo" type="text" name="URLVideo">
+  <br>
+  FreeTextVideo:<br>
+  <input id="FreeTextVideo" type="text" name="FreeTextVideo">
+  <br>
+</form>
+	<button id="sendVideo" class="generate" type="button">Send</button> 
+ </div>
+
+
+ <div id="page_content">
+  <h2>About</h2>
+  This is a structured content generator.
+</br>
+  You can use this tool to generate an example of a map, video, link or anything else defined in the tabs.
+</br>
+</br>
+  Enjoy!
+ </div>
+</div>
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
 <div class="tab">
   <button class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
@@ -406,7 +474,7 @@ function openContent(evt, contentType) {
   FreeText:<br>
   <input id="FreeTextMap" type="text" name="FreeTextMap">
 </form>
-	 <button id="sendMap" type="button">Send</button> 
+	 <button id="sendMap" class="generate" type="button">Send</button> 
 </div>
 
 <div id="Card" class="tabcontent">
@@ -425,7 +493,7 @@ function openContent(evt, contentType) {
     <br>
   
 </form>
-	<button id="sendCard" type="button">Send</button> 
+	<button id="sendCard" class="generate" type="button">Send</button> 
 </div>
 
 <div id="Video" class="tabcontent">
@@ -440,7 +508,7 @@ function openContent(evt, contentType) {
   <input id="FreeTextVideo" type="text" name="FreeTextVideo">
   <br>
 </form>
-	<button id="sendVideo" type="button">Send</button> 
+	<button id="sendVideo" class="generate" type="button">Send</button> 
 </div>
 
     
