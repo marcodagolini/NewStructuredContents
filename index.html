@@ -159,7 +159,7 @@ function openContent(evt, contentType) {
 
       var InterceptedLat = "";
       var InterceptedLong = "";
-      var FreeTextMap = $( "#FreeTextMap" ).val();
+      
       
       
       
@@ -167,6 +167,9 @@ function openContent(evt, contentType) {
 
       $(document).on('click', function(evt) {
           if($(evt.target).is('#sendMap')) {
+		  var FreeTextMap = $( "#FreeTextMap" ).val();
+		  InterceptedLat = $( "#Latitude" ).val();
+		  InterceptedLong = $( "#Longitude" ).val();
 		  alert(InterceptedLat);
 		  var DataMap = {
 	"type": "vertical",
@@ -216,13 +219,10 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          InterceptedLat = event.latLng.lat;
-		
+          InterceptedLat = event.latLng.lat;	
           InterceptedLong = event.latLng.lng
           $('#Latitude').val(InterceptedLat);
           $('#Longitude').val(InterceptedLong);
-		alert(InterceptedLat);
-            alert(JSON.stringify(event));
        });
         
         // Create the search box and link it to the UI element.
