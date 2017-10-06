@@ -165,7 +165,20 @@ function openContent(evt, contentType) {
       var InterceptedLat = "";
       var InterceptedLong = "";
       
-      
+      function sendSC(json) {
+
+        var cmdName = lpTag.agentSDK.cmdNames.writeSC;
+        var data = {
+            json: json,
+            metadata: {}
+        };
+
+        clearLog();
+
+        lpTag.agentSDK.command(cmdName, data, function (err) {
+            outputLog.value = err ? err : 'done';
+        });
+    }
       
       
 	    
@@ -198,6 +211,7 @@ function openContent(evt, contentType) {
 			}
 		]};
         }
+	sendSC(DataMap);
     });
 	    
 	    
@@ -235,6 +249,7 @@ function openContent(evt, contentType) {
 			}
 		]}
         }
+	sendSC(DataCard);
     });
       
 	    
@@ -264,6 +279,7 @@ function openContent(evt, contentType) {
 		]}
 		  alert(JSON.stringify(DataVideo));
         }
+	sendSC(DataVideo);
     });
       	    
 	    
