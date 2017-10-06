@@ -209,12 +209,12 @@ function openContent(evt, contentType) {
 			"type": "vertical",
 			"elements": [{
 				"type": "image",
-				"url": "http://cdn.bgr.com/2016/08/iphone-8-concept.jpg",
+				"url": ImageCard,
 				"tooltip": "image tooltip"
 			},
 			{
 				"type": "text",
-				"text": "IPhone 8",
+				"text": FreeTextCard,
 				"tooltip": "brand new iphone 8",
 				"style": {
 					"bold": true,
@@ -223,19 +223,16 @@ function openContent(evt, contentType) {
 			},
 			{
 				"type": "button",
-				"title": "Go to the page",
+				"title": FreeTextToURL,
 				"click": {
 					"actions": [{
 						"type": "link",
-						"id": "febf3237-f7d9-44bc-a17f-fc8abdfb0f25",
-						"name": "add to cart",
-						"uri": "http://www.google.com"
+						"uri": URLCard
 					}]
 				}
 			}
-		]
-}
-		  // alert(JSON.stringify(DataMap));
+		]}
+		  alert(JSON.stringify(DataCard));
         }
     });
       
