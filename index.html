@@ -214,7 +214,7 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          InterceptedLat = event.latLng.lat;
+          InterceptedLat = event.latLng;
 		alert(InterceptedLat);
           InterceptedLong = event.latLng.lng
           $('#Latitude').val(InterceptedLat);
