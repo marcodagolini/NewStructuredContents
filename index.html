@@ -204,35 +204,36 @@ function openContent(evt, contentType) {
 		  var ImageCard = $( "#ImageCard" ).val();
 		  var URLCard = $( "#URLCard" ).val();
 		  var FreeTextCard = $( "#FreeTextCard" ).val();
+		  var FreeTextToURL = $( "#FreeTextToURL" ).val();
 		  var DataCard = {
-	"type": "vertical",
-	"elements": [{
-			"type": "image",
-			"url": "http://cdn.bgr.com/2016/08/iphone-8-concept.jpg",
-			"tooltip": "image tooltip"
-		},
-		{
-			"type": "text",
-			"text": "IPhone 8",
-			"tooltip": "brand new iphone 8",
-			"style": {
-				"bold": true,
-				"size": "large"
+			"type": "vertical",
+			"elements": [{
+				"type": "image",
+				"url": "http://cdn.bgr.com/2016/08/iphone-8-concept.jpg",
+				"tooltip": "image tooltip"
+			},
+			{
+				"type": "text",
+				"text": "IPhone 8",
+				"tooltip": "brand new iphone 8",
+				"style": {
+					"bold": true,
+					"size": "large"
+				}
+			},
+			{
+				"type": "button",
+				"title": "Go to the page",
+				"click": {
+					"actions": [{
+						"type": "link",
+						"id": "febf3237-f7d9-44bc-a17f-fc8abdfb0f25",
+						"name": "add to cart",
+						"uri": "http://www.google.com"
+					}]
+				}
 			}
-		},
-		{
-			"type": "button",
-			"title": "Go to the page",
-			"click": {
-				"actions": [{
-					"type": "link",
-					"id": "febf3237-f7d9-44bc-a17f-fc8abdfb0f25",
-					"name": "add to cart",
-					"uri": "http://www.google.com"
-				}]
-			}
-		}
-	]
+		]
 }
 		  // alert(JSON.stringify(DataMap));
         }
