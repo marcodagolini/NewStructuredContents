@@ -189,8 +189,8 @@ function openContent(evt, contentType) {
      $(document).on('click', function(evt) {
           if($(evt.target).is('#sendMap')) {
 		  var FreeTextMap = $( "#FreeTextMap" ).val();
-		  InterceptedLat = $( "#Latitude" ).val();
-		  InterceptedLong = $( "#Longitude" ).val();
+		  InterceptedLat = Number($( "#Latitude" ).val());
+		  InterceptedLong = Number($( "#Longitude" ).val());
 		  var DataMap = {
 			"type": "vertical",
 			"elements": [{
