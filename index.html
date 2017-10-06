@@ -174,7 +174,9 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-            alert(JSON.stringify(event));
+          $('#Latitude').val(event.latLng.lat);
+          $('#Longitude').val(event.latLng.lng);
+            // alert(JSON.stringify(event));
        });
         
         // Create the search box and link it to the UI element.
@@ -261,10 +263,10 @@ function openContent(evt, contentType) {
     <div id="map"></div>
   <form>
   Latitude:<br>
-  <input type="text" name="Latitude">
+  <input id="Latitude" type="text" name="Latitude">
   <br>
   Longitude:<br>
-  <input type="text" name="Longitude">
+  <input id="Longitude" type="text" name="Longitude">
     <br>
   FreeText:<br>
   <input type="text" name="FreeTextMap">
