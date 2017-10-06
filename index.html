@@ -108,6 +108,10 @@
           mapTypeId: 'roadmap'
         });
 
+        google.maps.event.addListener(map, 'click', function(event) {
+            alert(JSON.stringify(event));
+       });
+        
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -168,10 +172,7 @@
         });
       }
       
-      google.maps.event.addListener(map, 'click', function(event) {
-    
-            alert(JSON.stringify(event));
-       });
+      
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClk9cYf1HsmnrBwzxrfYtJErFlOcvI7V4&libraries=places&callback=initAutocomplete"
