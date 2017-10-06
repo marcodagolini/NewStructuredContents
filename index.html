@@ -122,7 +122,7 @@ div.tab button.active {
     </style>
     
     <script>
-function openCity(evt, cityName) {
+function openContent(evt, contentType) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -132,7 +132,7 @@ function openCity(evt, cityName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(contentType).style.display = "block";
     evt.currentTarget.className += " active";
 }
 </script>
@@ -140,25 +140,25 @@ function openCity(evt, cityName) {
   </head>
   <body>
     
-    <p>Click on the buttons inside the tabbed menu:</p>
+    <p>Build your structured content:</p>
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+  <button class="tablinks" onclick="openContent(event, 'Map')">Map</button>
+  <button class="tablinks" onclick="openContent(event, 'Card')">Card</button>
+  <button class="tablinks" onclick="openContent(event, 'Video')">Video</button>
 </div>
 
-<div id="London" class="tabcontent">
+<div id="Map" class="tabcontent">
   <h3>London</h3>
   <p>London is the capital city of England.</p>
 </div>
 
-<div id="Paris" class="tabcontent">
+<div id="Card" class="tabcontent">
   <h3>Paris</h3>
   <p>Paris is the capital of France.</p> 
 </div>
 
-<div id="Tokyo" class="tabcontent">
+<div id="Video" class="tabcontent">
   <h3>Tokyo</h3>
   <p>Tokyo is the capital of Japan.</p>
 </div>
