@@ -155,8 +155,8 @@ function openContent(evt, contentType) {
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      var Latitudine = "";
-      var Longitudine = "";
+      var InterceptedLat = "";
+      var InterceptedLong = "";
       var FreeTextMap = $( "#FreeTextMap" ).val();
       
       
@@ -165,18 +165,18 @@ function openContent(evt, contentType) {
 
       $(document).on('click', function(evt) {
           if($(evt.target).is('#sendMap')) {
-		  alert(Latitudine);
+		  alert(InterceptedLat);
 		  var DataMap = {
 	"type": "vertical",
 	"elements": [{
 			"type": "map",
-			"lo": Longitudine,
-			"la": Latitudine,
+			"lo": InterceptedLat,
+			"la": InterceptedLong,
 			"click": {
 				"actions": [{
 					"type": "navigate",
-					"lo": Longitudine,
-					"la": Latitudine
+					"lo": InterceptedLat,
+					"la": InterceptedLong
 				}]
 			},
 			"tooltip": "map tooltip"
@@ -214,11 +214,11 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          Latitudine = event.latLng.lat;
-		alert(Latitudine);
-          Longitudine = event.latLng.lng
-          $('#Latitude').val(Latitudine);
-          $('#Longitude').val(Longitudine);
+          InterceptedLat = event.latLng.lat;
+		alert(InterceptedLat);
+          InterceptedLong = event.latLng.lng
+          $('#Latitude').val(InterceptedLat);
+          $('#Longitude').val(InterceptedLong);
             // alert(JSON.stringify(event));
        });
         
