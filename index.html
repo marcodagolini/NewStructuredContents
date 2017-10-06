@@ -155,6 +155,7 @@ function openContent(evt, contentType) {
 
       var Latitude = "";
       var Longitude = "";
+      var FreeTextMap = $( "#FreeTextMap" ).val();
       
       var DataMap = {
 	"type": "vertical",
@@ -173,7 +174,7 @@ function openContent(evt, contentType) {
 		},
 		{
 			"type": "text",
-			"text": "This is an example for text element",
+			"text": FreeTextMap,
 			"tooltip": "text tooltip",
 			"rtl": true
 		}
@@ -306,7 +307,7 @@ function openContent(evt, contentType) {
   <input id="Longitude" type="text" name="Longitude">
     <br>
   FreeText:<br>
-  <input type="text" name="FreeTextMap">
+  <input id="FreeTextMap" type="text" name="FreeTextMap">
 </form>
 	 <button id="sendMap" type="button">Send</button> 
 </div>
