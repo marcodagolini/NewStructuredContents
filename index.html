@@ -137,33 +137,6 @@ function openContent(evt, contentType) {
 }
 </script>
     
-  </head>
-  <body>
-    
-    <p>Build your structured content:</p>
-
-<div class="tab">
-  <button class="tablinks" onclick="openContent(event, 'Map')">Map</button>
-  <button class="tablinks" onclick="openContent(event, 'Card')">Card</button>
-  <button class="tablinks" onclick="openContent(event, 'Video')">Video</button>
-</div>
-
-<div id="Map" class="tabcontent">
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map"></div>
-</div>
-
-<div id="Card" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
-
-<div id="Video" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
-
-    
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
@@ -249,6 +222,35 @@ function openContent(evt, contentType) {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClk9cYf1HsmnrBwzxrfYtJErFlOcvI7V4&libraries=places&callback=initAutocomplete"
          async defer></script>
+    
+  </head>
+  <body>
+    
+    <p>Build your structured content:</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openContent(event, 'Map')">Map</button>
+  <button class="tablinks" onclick="openContent(event, 'Card')">Card</button>
+  <button class="tablinks" onclick="openContent(event, 'Video')">Video</button>
+</div>
+
+<div id="Map" class="tabcontent">
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+</div>
+
+<div id="Card" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Video" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+    
+    
   </body>
 </html>   
   
