@@ -153,8 +153,8 @@ function openContent(evt, contentType) {
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      var Latitude = "";
-      var Longitude = "";
+      var Lat = "";
+      var Long = "";
       var FreeTextMap = $( "#FreeTextMap" ).val();
       
       
@@ -168,13 +168,13 @@ function openContent(evt, contentType) {
 	"type": "vertical",
 	"elements": [{
 			"type": "map",
-			"lo": Longitude,
-			"la": Latitude,
+			"lo": Long,
+			"la": Lat,
 			"click": {
 				"actions": [{
 					"type": "navigate",
-					"lo": Longitude,
-					"la": Latitude
+					"lo": Long,
+					"la": Lat
 				}]
 			},
 			"tooltip": "map tooltip"
@@ -212,10 +212,10 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          Latitude = event.latLng.lat;
-          Longitude = event.latLng.lng
-          $('#Latitude').val(Latitude);
-          $('#Longitude').val(Longitude);
+          Lat = event.latLng.lat;
+          Long = event.latLng.lng
+          $('#Latitude').val(Lat);
+          $('#Longitude').val(Long);
             // alert(JSON.stringify(event));
        });
         
