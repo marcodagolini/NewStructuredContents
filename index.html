@@ -157,7 +157,7 @@ function openContent(evt, contentType) {
       function initAutocomplete() {
         
         $(document).on('click', function(evt) {
-           if($(evt.target).is('#map')) {
+           if($(evt.target).is('.tabMap')) {
            
            alert("ciao");
         
@@ -247,9 +247,9 @@ function openContent(evt, contentType) {
     <p>Build your structured content:</p>
 
 <div class="tab">
-  <button class="tablinks" onclick="openContent(event, 'Map')">Map</button>
-  <button class="tablinks" onclick="openContent(event, 'Card')">Card</button>
-  <button class="tablinks" onclick="openContent(event, 'Video')">Video</button>
+  <button class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
+  <button class="tablinks tabCard" onclick="openContent(event, 'Card')">Card</button>
+  <button class="tablinks tabVideo" onclick="openContent(event, 'Video')">Video</button>
 </div>
 
 <div id="Map" class="tabcontent">
