@@ -191,7 +191,6 @@ function openContent(evt, contentType) {
 				"rtl": true
 			}
 		]};
-		  // alert(JSON.stringify(DataMap));
         }
     });
 	    
@@ -229,12 +228,38 @@ function openContent(evt, contentType) {
 				}
 			}
 		]}
-		  alert(JSON.stringify(DataCard));
         }
     });
       
 	    
 	    
+	$(document).on('click', function(evt) {
+          if($(evt.target).is('#sendVideo')) {
+		  var URLImage = $( "#URLImage" ).val();
+		  var URLVideo = $( "#URLVideo" ).val();
+		  var FreeTextVideo = $( "#FreeTextVideo" ).val();
+		  var DataVideo = {
+			"type": "vertical",
+			"elements": [{
+				"type": "image",
+				"url": URLImage,
+				"tooltip": "image tooltip",
+				"click": {
+					"actions": [{
+						"type": "link",
+						"uri": URLVideo
+					}]
+				}
+			},
+			{
+				"type": "text",
+				"text": FreeTextVideo
+			}
+		]}
+		  alert(JSON.stringify(DataVideo));
+        }
+    });
+      	    
 	    
 	
 	    
@@ -386,8 +411,14 @@ function openContent(evt, contentType) {
 
 <div id="Video" class="tabcontent">
   <form>
-  URL:<br>
+  URLImage:<br>
+  <input id="URLImage" type="text" name="URLImage">
+  <br>
+  URLVideo:<br>
   <input id="URLVideo" type="text" name="URLVideo">
+  <br>
+  FreeTextVideo:<br>
+  <input id="FreeTextVideo" type="text" name="FreeTextVideo">
   <br>
 </form>
 	<button id="sendVideo" type="button">Send</button> 
