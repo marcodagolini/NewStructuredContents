@@ -153,8 +153,8 @@ function openContent(evt, contentType) {
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      var Lat = "";
-      var Long = "";
+      var Latitudine = "";
+      var Longitudine = "";
       var FreeTextMap = $( "#FreeTextMap" ).val();
       
       
@@ -163,18 +163,18 @@ function openContent(evt, contentType) {
 
       $(document).on('click', function(evt) {
           if($(evt.target).is('#sendMap')) {
-		  alert(Lat);
+		  alert(Latitudine);
 		  var DataMap = {
 	"type": "vertical",
 	"elements": [{
 			"type": "map",
-			"lo": Long,
-			"la": Lat,
+			"lo": Longitudine,
+			"la": Latitudine,
 			"click": {
 				"actions": [{
 					"type": "navigate",
-					"lo": Long,
-					"la": Lat
+					"lo": Longitudine,
+					"la": Latitudine
 				}]
 			},
 			"tooltip": "map tooltip"
@@ -212,10 +212,10 @@ function openContent(evt, contentType) {
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
-          Lat = event.latLng.lat;
-          Long = event.latLng.lng
-          $('#Latitude').val(Lat);
-          $('#Longitude').val(Long);
+          Latitudine = event.latLng.lat;
+          Longitudine = event.latLng.lng
+          $('#Latitude').val(Latitudine);
+          $('#Longitude').val(Longitudine);
             // alert(JSON.stringify(event));
        });
         
