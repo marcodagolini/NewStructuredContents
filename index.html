@@ -132,17 +132,12 @@ div.tab button.active {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script>
 	   
-	    $( window ).on( "load", function() { setTimeout(function() {
+
+	$("document").ready(function() {
+          setTimeout(function() {
              $(".tabMap").trigger('click');
-          },10); });
-	    
-	    
-	    
-	// $("document").ready(function() {
-          // setTimeout(function() {
-             // $(".tabMap").trigger('click');
-          // },10);
-        // });
+          },10);
+        });
 function openContent(evt, contentType) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
