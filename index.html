@@ -214,6 +214,7 @@ function openContent(evt, contentType) {
 
         google.maps.event.addListener(map, 'click', function(event) {
           Latitudine = event.latLng.lat;
+		alert(Latitudine);
           Longitudine = event.latLng.lng
           $('#Latitude').val(Latitudine);
           $('#Longitude').val(Longitudine);
