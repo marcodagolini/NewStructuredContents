@@ -1,512 +1,445 @@
-<!DOCTYPE html>
-
-
-
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Places Searchbox</title>
-    
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-     body
-{
- background-color:#f0f0f0;
- margin:0px auto;
- padding:0px;
- font-family:helvetica;
- height:2000px;
-}
-h1
-{
- text-align:relative;
- font-weight: 200;
- font-size:35px;
- margin-top:20px;
- margin-left:10px;
- color:#1e90ff;
-}
-h1 p
-{
- text-align:center;
- margin:0px;
- font-size:18px;
- text-decoration:underline;
- color:white;
-}
-h2 {
-font-weight: 300;
-}
-#main_content
-{
- margin-top:50px;
- width:500px;
- margin-left:10px;
-}
-#main_content li
-{
- display:inline;
- list-style-type:none;
- background-color:#1e90ff;
- padding:10px;
- border-radius:5px 5px 0px 0px;
- font-weight: 300;
- color:#292A0A;
- cursor:pointer;
-}
-#main_content li.notselected
-{
- background-color:#1e90ff;
- color:#292A0A;
-}
-#main_content li.selected
-{
- background-color:#ddd;
- color:#292A0A;
-}
-#main_content .hidden_desc
-{
- display:none;
- visibility:hidden;
-}
-#main_content #page_content
-{
- background-color:#ddd;
- padding:10px;
- margin-top:10px;
- border-radius:0px 5px 5px 5px;
- color:#292A0A;
- line-height: 1.6em;
- word-spacing:4px;
- font-weight: 300;
-}
-
-.generate
-{
-  padding: 10px;
-
-  border-radius: 0px 0px 5px 5px;
-  font-weight: 200;
-  position: relative;
-  background-color:#ccc;
-  cursor: pointer;
-}
-
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 22px;
-        font-weight: 300;
-        margin-left: 5px;
-        margin-top: 10px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 120px;
-      }
-
+   <head>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+     <meta charset="utf-8">
+     <title>Places Searchbox</title>
      
-    </style>
-    
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
-	  
-    
-	  
-    <script>
-	   
-
-	$("document").ready(function() {
-          setTimeout(function() {
-             $("#page1").trigger('click');
-          },10);
-        });
-function change_tab(id)
- {
-   document.getElementById("page_content").innerHTML=document.getElementById(id).innerHTML;
-   document.getElementById("page1").className="nonselected";
-   document.getElementById("page2").className="notselected";
-   document.getElementById("page3").className="notselected";
-   document.getElementById(id).className="selected";
- }
-</script>
-    
-    <script>
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      var InterceptedLat = "";
-      var InterceptedLong = "";
-
-      lpTag.agentSDK.init({});
-      
-      function sendSC(json) {
-
-        var cmdName = lpTag.agentSDK.cmdNames.writeSC;
-        var data = {json:json};
-
-        lpTag.agentSDK.command(cmdName, data, function (err) {
-            outputLog.value = err ? err : 'done';
-        });
-    }
-      
-      
-	    
-
-     $(document).on('click', function(evt) {
-          if($(evt.target).is('#sendMap')) {
-		  var FreeTextMap = $( "#FreeTextMap" ).val();
-		  InterceptedLat = Number($( "#Latitude" ).val());
-		  InterceptedLong = Number($( "#Longitude" ).val());
-		  var DataMap = {
-			"type": "vertical",
-			"elements": [{
-				"type": "map",
-				"lo": InterceptedLat,
-				"la": InterceptedLong,
-				"click": {
-					"actions": [{
-						"type": "navigate",
-						"lo": InterceptedLat,
-						"la": InterceptedLong
-					}]
-				},
-				"tooltip": "map tooltip"
-			},
-			{
-				"type": "text",
-				"text": FreeTextMap,
-				"tooltip": "text tooltip",
-				"rtl": true
-			}
-		]};
-        }
-	sendSC(DataMap);
-    });
-	    
-	    
-	$(document).on('click', function(evt) {
-          if($(evt.target).is('#sendCard')) {
-		  var ImageCard = $( "#ImageCard" ).val();
-		  var URLCard = $( "#URLCard" ).val();
-		  var FreeTextCard = $( "#FreeTextCard" ).val();
-		  var FreeTextToURL = $( "#FreeTextToURL" ).val();
-		  var DataCard = {
-			"type": "vertical",
-			"elements": [{
-				"type": "image",
-				"url": ImageCard,
-				"tooltip": "image tooltip"
-			},
-			{
-				"type": "text",
-				"text": FreeTextCard,
-				"tooltip": "brand new iphone 8",
-				"style": {
-					"bold": true,
-					"size": "large"
-				}
-			},
-			{
-				"type": "button",
-				"title": FreeTextToURL,
-				"click": {
-					"actions": [{
-						"type": "link",
-						"uri": URLCard
-					}]
-				}
-			}
-		]}
-        }
-	sendSC(DataCard);
-    });
-      
-	    
-	    
-	$(document).on('click', function(evt) {
-          if($(evt.target).is('#sendVideo')) {
-		  var URLImage = $( "#URLImage" ).val();
-		  var URLVideo = $( "#URLVideo" ).val();
-		  var FreeTextVideo = $( "#FreeTextVideo" ).val();
-		  var DataVideo = {
-			"type": "vertical",
-			"elements": [{
-				"type": "image",
-				"url": URLImage,
-				"tooltip": "image tooltip",
-				"click": {
-					"actions": [{
-						"type": "link",
-						"uri": URLVideo
-					}]
-				}
-			},
-			{
-				"type": "text",
-				"text": FreeTextVideo
-			}
-		]}
-        }
-	sendSC(DataVideo);
-    });
-      	    
-	    
-	
-	    
-	    
-	    
-	    
-	    
-	    
-      
-      
-     
-      
-      function initAutocomplete() {
-        
-        
-           
-        
-        
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13,
-          mapTypeId: 'roadmap'
-        });
-
-        google.maps.event.addListener(map, 'click', function(event) {
-          InterceptedLat = event.latLng.lat;	
-          InterceptedLong = event.latLng.lng
-          $('#Latitude').val(InterceptedLat);
-          $('#Longitude').val(InterceptedLong);
-       });
-        
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-        });
-             
-       
-      }
-      
-      
-
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClk9cYf1HsmnrBwzxrfYtJErFlOcvI7V4&libraries=places&callback=initAutocomplete"
-         async defer></script>
-    
-  </head>
-  <body>
-    
-    <h1>Build your structured content:</h1>
-	  
-	  
-	  
-	  <div id="main_content">
-
-
- <li class="nonselected" id="page1" onclick="change_tab(this.id);">Map</li>
- <li class="notselected" id="page2" onclick="change_tab(this.id);">Card</li>
- <li class="notselected" id="page3" onclick="change_tab(this.id);">Video</li>
+     <style>
+       /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+       html, body, #map {
+          height: 280px;
+          width: 280px;
+          margin: 0px;
+          padding: 0px
+       }
+       #description {
+         font-family: Roboto;
+         font-size: 15px;
+         font-weight: 300;
+       }
  
-
-
- <div class='hidden_desc' id="Map">
-   <h2>Google Map</h2>
+       #infowindow-content .title {
+         font-weight: bold;
+       }
+ 
+       #infowindow-content {
+         display: none;
+       }
+ 
+       #map #infowindow-content {
+         display: inline;
+       }
+ 
+       .pac-card {
+         margin: 10px 10px 0 0;
+         border-radius: 2px 0 0 2px;
+         box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         outline: none;
+         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+         background-color: #fff;
+         font-family: Roboto;
+       }
+ 
+       #pac-container {
+         padding-bottom: 12px;
+         margin-right: 12px;
+       }
+ 
+       .pac-controls {
+         display: inline-block;
+         padding: 5px 11px;
+       }
+ 
+       .pac-controls label {
+         font-family: Roboto;
+         font-size: 13px;
+         font-weight: 300;
+       }
+ 
+       #pac-input {
+         background-color: #fff;
+         font-family: Roboto;
+         font-size: 22px;
+         font-weight: 300;
+         margin-left: 5px;
+         margin-top: 10px;
+         padding: 0 11px 0 13px;
+         text-overflow: ellipsis;
+         width: 120px;
+       }
+ 
+       #pac-input:focus {
+         border-color: #4d90fe;
+       }
+ 
+       #title {
+         color: #fff;
+         background-color: #4d90fe;
+         font-size: 25px;
+         font-weight: 500;
+         padding: 6px 12px;
+       }
+       #target {
+         width: 345px;
+       }
+       div.tab {
+     overflow: hidden;
+     border: 1px solid #ccc;
+     background-color: #f1f1f1;
+ }
+ 
+ /* Style the buttons inside the tab */
+ div.tab button {
+     background-color: inherit;
+     float: left;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     padding: 14px 16px;
+     transition: 0.3s;
+     font-size: 17px;
+ }
+ 
+ /* Change background color of buttons on hover */
+ div.tab button:hover {
+     background-color: #ddd;
+ }
+ 
+ /* Create an active/current tablink class */
+ div.tab button.active {
+     background-color: #ccc;
+ }
+ 
+ /* Style the tab content */
+ .tabcontent {
+     display: none;
+     padding: 6px 12px;
+     height: 500px;
+     width: 320px;
+     border: 1px solid #ccc;
+     border-top: none;
+ }
+     </style>
+     
+     
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+     <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+ 	  
+     
+ 	  
+     <script>
+ 	   
+ 
+ 	$("document").ready(function() {
+           setTimeout(function() {
+              $(".tabMap").trigger('click');
+           },10);
+         });
+ function openContent(evt, contentType) {
+     var i, tabcontent, tablinks;
+     tabcontent = document.getElementsByClassName("tabcontent");
+     for (i = 0; i < tabcontent.length; i++) {
+         tabcontent[i].style.display = "none";
+     }
+     tablinks = document.getElementsByClassName("tablinks");
+     for (i = 0; i < tablinks.length; i++) {
+         tablinks[i].className = tablinks[i].className.replace(" active", "");
+     }
+     document.getElementById(contentType).style.display = "block";
+     evt.currentTarget.className += " active";
+ }
+ </script>
+     
+     <script>
+       // This example adds a search box to a map, using the Google Place Autocomplete
+       // feature. People can enter geographical searches. The search box will return a
+       // pick list containing a mix of places and predicted search terms.
+ 
+       // This example requires the Places library. Include the libraries=places
+       // parameter when you first load the API. For example:
+       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+ 
+       var InterceptedLat = "";
+       var InterceptedLong = "";
+ 
+       lpTag.agentSDK.init({});
+       
+       function sendSC(json) {
+ 
+         var cmdName = lpTag.agentSDK.cmdNames.writeSC;
+         var data = {json:json};
+ 
+         lpTag.agentSDK.command(cmdName, data, function (err) {
+             outputLog.value = err ? err : 'done';
+         });
+     }
+       
+       
+ 	    
+ 
+      $(document).on('click', function(evt) {
+           if($(evt.target).is('#sendMap')) {
+ 		  var FreeTextMap = $( "#FreeTextMap" ).val();
+ 		  InterceptedLat = Number($( "#Latitude" ).val());
+ 		  InterceptedLong = Number($( "#Longitude" ).val());
+ 		  var DataMap = {
+ 			"type": "vertical",
+ 			"elements": [{
+ 				"type": "map",
+ 				"lo": InterceptedLat,
+ 				"la": InterceptedLong,
+ 				"click": {
+ 					"actions": [{
+ 						"type": "navigate",
+ 						"lo": InterceptedLat,
+ 						"la": InterceptedLong
+ 					}]
+ 				},
+ 				"tooltip": "map tooltip"
+ 			},
+ 			{
+ 				"type": "text",
+ 				"text": FreeTextMap,
+ 				"tooltip": "text tooltip",
+ 				"rtl": true
+ 			}
+ 		]};
+         }
+ 	sendSC(DataMap);
+     });
+ 	    
+ 	    
+ 	$(document).on('click', function(evt) {
+           if($(evt.target).is('#sendCard')) {
+ 		  var ImageCard = $( "#ImageCard" ).val();
+ 		  var URLCard = $( "#URLCard" ).val();
+ 		  var FreeTextCard = $( "#FreeTextCard" ).val();
+ 		  var FreeTextToURL = $( "#FreeTextToURL" ).val();
+ 		  var DataCard = {
+ 			"type": "vertical",
+ 			"elements": [{
+ 				"type": "image",
+ 				"url": ImageCard,
+ 				"tooltip": "image tooltip"
+ 			},
+ 			{
+ 				"type": "text",
+ 				"text": FreeTextCard,
+ 				"tooltip": "brand new iphone 8",
+ 				"style": {
+ 					"bold": true,
+ 					"size": "large"
+ 				}
+ 			},
+ 			{
+ 				"type": "button",
+ 				"title": FreeTextToURL,
+ 				"click": {
+ 					"actions": [{
+ 						"type": "link",
+ 						"uri": URLCard
+ 					}]
+ 				}
+ 			}
+ 		]}
+         }
+ 	sendSC(DataCard);
+     });
+       
+ 	    
+ 	    
+ 	$(document).on('click', function(evt) {
+           if($(evt.target).is('#sendVideo')) {
+ 		  var URLImage = $( "#URLImage" ).val();
+ 		  var URLVideo = $( "#URLVideo" ).val();
+ 		  var FreeTextVideo = $( "#FreeTextVideo" ).val();
+ 		  var DataVideo = {
+ 			"type": "vertical",
+ 			"elements": [{
+ 				"type": "image",
+ 				"url": URLImage,
+ 				"tooltip": "image tooltip",
+ 				"click": {
+ 					"actions": [{
+ 						"type": "link",
+ 						"uri": URLVideo
+ 					}]
+ 				}
+ 			},
+ 			{
+ 				"type": "text",
+ 				"text": FreeTextVideo
+ 			}
+ 		]}
+         }
+ 	sendSC(DataVideo);
+     });
+       	    
+ 	    
+ 	
+ 	    
+ 	    
+ 	    
+ 	    
+ 	    
+ 	    
+       
+       
+      
+       
+       function initAutocomplete() {
+         
+         
+            
+         
+         
+         var map = new google.maps.Map(document.getElementById('map'), {
+           center: {lat: -33.8688, lng: 151.2195},
+           zoom: 13,
+           mapTypeId: 'roadmap'
+         });
+ 
+         google.maps.event.addListener(map, 'click', function(event) {
+           InterceptedLat = event.latLng.lat;	
+           InterceptedLong = event.latLng.lng
+           $('#Latitude').val(InterceptedLat);
+           $('#Longitude').val(InterceptedLong);
+        });
+         
+         // Create the search box and link it to the UI element.
+         var input = document.getElementById('pac-input');
+         var searchBox = new google.maps.places.SearchBox(input);
+         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+ 
+         // Bias the SearchBox results towards current map's viewport.
+         map.addListener('bounds_changed', function() {
+           searchBox.setBounds(map.getBounds());
+         });
+ 
+         var markers = [];
+         // Listen for the event fired when the user selects a prediction and retrieve
+         // more details for that place.
+         searchBox.addListener('places_changed', function() {
+           var places = searchBox.getPlaces();
+ 
+           if (places.length == 0) {
+             return;
+           }
+ 
+           // Clear out the old markers.
+           markers.forEach(function(marker) {
+             marker.setMap(null);
+           });
+           markers = [];
+ 
+           // For each place, get the icon, name and location.
+           var bounds = new google.maps.LatLngBounds();
+           places.forEach(function(place) {
+             if (!place.geometry) {
+               console.log("Returned place contains no geometry");
+               return;
+             }
+             var icon = {
+               url: place.icon,
+               size: new google.maps.Size(71, 71),
+               origin: new google.maps.Point(0, 0),
+               anchor: new google.maps.Point(17, 34),
+               scaledSize: new google.maps.Size(25, 25)
+             };
+ 
+             // Create a marker for each place.
+             markers.push(new google.maps.Marker({
+               map: map,
+               icon: icon,
+               title: place.name,
+               position: place.geometry.location
+             }));
+ 
+             if (place.geometry.viewport) {
+               // Only geocodes have viewport.
+               bounds.union(place.geometry.viewport);
+             } else {
+               bounds.extend(place.geometry.location);
+             }
+           });
+           map.fitBounds(bounds);
+         });
+              
+        
+       }
+       
+       
+ 
+     </script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClk9cYf1HsmnrBwzxrfYtJErFlOcvI7V4&libraries=places&callback=initAutocomplete"
+          async defer></script>
+     
+   </head>
+   <body>
+     
+     <p>Build your structured content:</p>
+ 
+ <div class="tab">
+   <button class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
+   <button class="tablinks tabCard" onclick="openContent(event, 'Card')">Card</button>
+   <button class="tablinks tabVideo" onclick="openContent(event, 'Video')">Video</button>
+ </div>
+ 
+ <div id="Map" class="tabcontent">
    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map"></div>
-  <form>
-  Latitude:<br>
-  <input id="Latitude" type="text" name="Latitude">
-  <br>
-  Longitude:<br>
-  <input id="Longitude" type="text" name="Longitude">
-    <br>
-  FreeText:<br>
-  <input id="FreeTextMap" type="text" name="FreeTextMap">
-</form>
-	 <button id="sendMap" class="generate" type="button">Generate Code</button> 
-
-
+     <div id="map"></div>
+   <form>
+   Latitude:<br>
+   <input id="Latitude" type="text" name="Latitude">
+   <br>
+   Longitude:<br>
+   <input id="Longitude" type="text" name="Longitude">
+     <br>
+   FreeText:<br>
+   <input id="FreeTextMap" type="text" name="FreeTextMap">
+ </form>
+ 	 <button id="sendMap" type="button">Send</button> 
  </div>
-
- <div class='hidden_desc' id="Card">
-  <h2>Card</h2>
-  <form>
-  Image:<br>
-  <input id="ImageCard" type="text" name="ImageCard">
-  <br>
-  FreeText:<br>
-  <input id="FreeTextCard" type="text" name="FreeTextCard">
-  <br>
-  FreeTextToURL:<br>
-  <input id="FreeTextToURL" type="text" name="FreeTextToURL">
-  <br>
-  URL:<br>
-  <input id="URLCard" type="text" name="URLCard">
-    <br>
-  
-</form>
-	<button id="sendCard" class="generate" type="button">Send</button> 
+ 
+ <div id="Card" class="tabcontent">
+   <form>
+   Image:<br>
+   <input id="ImageCard" type="text" name="ImageCard">
+   <br>
+   FreeText:<br>
+   <input id="FreeTextCard" type="text" name="FreeTextCard">
+   <br>
+   FreeTextToURL:<br>
+   <input id="FreeTextToURL" type="text" name="FreeTextToURL">
+   <br>
+   URL:<br>
+   <input id="URLCard" type="text" name="URLCard">
+     <br>
+   
+ </form>
+ 	<button id="sendCard" type="button">Send</button> 
  </div>
-
- <div class='hidden_desc' id="Video">
-  <h2>Video</h2>
-  <form>
-  URLImage:<br>
-  <input id="URLImage" type="text" name="URLImage">
-  <br>
-  URLVideo:<br>
-  <input id="URLVideo" type="text" name="URLVideo">
-  <br>
-  FreeTextVideo:<br>
-  <input id="FreeTextVideo" type="text" name="FreeTextVideo">
-  <br>
-</form>
-	<button id="sendVideo" class="generate" type="button">Send</button> 
+ 
+ <div id="Video" class="tabcontent">
+   <form>
+   URLImage:<br>
+   <input id="URLImage" type="text" name="URLImage">
+   <br>
+   URLVideo:<br>
+   <input id="URLVideo" type="text" name="URLVideo">
+   <br>
+   FreeTextVideo:<br>
+   <input id="FreeTextVideo" type="text" name="FreeTextVideo">
+   <br>
+ </form>
+ 	<button id="sendVideo" type="button">Send</button> 
  </div>
-
-
- <div id="page_content">
-  <h2>About</h2>
-  This is a structured content generator.
-</br>
-  You can use this tool to generate an example of a map, video, link or anything else defined in the tabs.
-</br>
-</br>
-  Enjoy!
- </div>
-</div>
-
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-
-<div class="tab">
-  <button class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
-  <button class="tablinks tabCard" onclick="openContent(event, 'Card')">Card</button>
-  <button class="tablinks tabVideo" onclick="openContent(event, 'Video')">Video</button>
-</div>
-
-<div id="Map" class="tabcontent">
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map"></div>
-  <form>
-  Latitude:<br>
-  <input id="Latitude" type="text" name="Latitude">
-  <br>
-  Longitude:<br>
-  <input id="Longitude" type="text" name="Longitude">
-    <br>
-  FreeText:<br>
-  <input id="FreeTextMap" type="text" name="FreeTextMap">
-</form>
-	 <button id="sendMap" class="generate" type="button">Send</button> 
-</div>
-
-<div id="Card" class="tabcontent">
-  <form>
-  Image:<br>
-  <input id="ImageCard" type="text" name="ImageCard">
-  <br>
-  FreeText:<br>
-  <input id="FreeTextCard" type="text" name="FreeTextCard">
-  <br>
-  FreeTextToURL:<br>
-  <input id="FreeTextToURL" type="text" name="FreeTextToURL">
-  <br>
-  URL:<br>
-  <input id="URLCard" type="text" name="URLCard">
-    <br>
-  
-</form>
-	<button id="sendCard" class="generate" type="button">Send</button> 
-</div>
-
-<div id="Video" class="tabcontent">
-  <form>
-  URLImage:<br>
-  <input id="URLImage" type="text" name="URLImage">
-  <br>
-  URLVideo:<br>
-  <input id="URLVideo" type="text" name="URLVideo">
-  <br>
-  FreeTextVideo:<br>
-  <input id="FreeTextVideo" type="text" name="FreeTextVideo">
-  <br>
-</form>
-	<button id="sendVideo" class="generate" type="button">Send</button> 
-</div>
-
-    
-    
-  </body>
-</html>   
+ 
+     
+     
+   </body>
+</html> 
   
