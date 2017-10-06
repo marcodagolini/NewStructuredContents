@@ -173,7 +173,7 @@ function openContent(evt, contentType) {
       function sendSC(json) {
 
         var cmdName = lpTag.agentSDK.cmdNames.writeSC;
-        var data = json;
+        var data = {json:json};
 
         lpTag.agentSDK.command(cmdName, data, function (err) {
             outputLog.value = err ? err : 'done';
