@@ -174,8 +174,7 @@
               $(".tabMap").trigger('click');
            },10);
          });
-        </script>
-           <script>
+
  function openContent(evt, contentType) {
      var i, tabcontent, tablinks;
      tabcontent = document.getElementsByClassName("tabcontent");
@@ -187,7 +186,7 @@
          tablinks[i].className = tablinks[i].className.replace(" active", "");
      }
      document.getElementById(contentType).style.display = "block";
-     evt.currentTarget.className += " active";
+     evt.Target.className += " active";
  }
  </script>
      
