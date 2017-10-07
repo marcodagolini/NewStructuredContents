@@ -172,7 +172,7 @@
            setTimeout(function() {
               $(".tabMap").trigger('click');
               var mybutton = document.getElementsByClassName("tabMap");
-              mybutton.className = mybutton.className.replace(" active", "");
+              mybutton.className = mybutton.className += " active";
            },10);
          });
  function openContent(evt, contentType) {
