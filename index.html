@@ -6,7 +6,7 @@
    <head>
      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
      <meta charset="utf-8">
-     <title>Places Searchbox</title>
+     <title>Structured Contents</title>
      
      <style>
        /* Always set the map height explicitly to define the size of the div
@@ -165,7 +165,7 @@
      <script>
  	   
  
- 	$("document").ready(function() {
+       	$("document").ready(function() {
            setTimeout(function() {
               var mybutton = document.getElementById("buttonMap");
               mybutton.className += " active";
@@ -173,20 +173,20 @@
            },10);
          });
 
- function openContent(evt, contentType) {
-     var i, tabcontent, tablinks;
-     tabcontent = document.getElementsByClassName("tabcontent");
-     for (i = 0; i < tabcontent.length; i++) {
-         tabcontent[i].style.display = "none";
-     }
-     tablinks = document.getElementsByClassName("tablinks");
-     for (i = 0; i < tablinks.length; i++) {
-         tablinks[i].className = tablinks[i].className.replace(" active", "");
-     }
-     document.getElementById(contentType).style.display = "block";
-     evt.target.className += " active";
- }
- </script>
+         function openContent(evt, contentType) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                   tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(contentType).style.display = "block";
+              evt.target.className += " active";
+          }
+    </script>
      
      <script>
        // This example adds a search box to a map, using the Google Place Autocomplete
@@ -197,121 +197,119 @@
        // parameter when you first load the API. For example:
        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
  
-       var InterceptedLat = "";
-       var InterceptedLong = "";
+         var InterceptedLat = "";
+         var InterceptedLong = "";
  
-       lpTag.agentSDK.init({});
+         lpTag.agentSDK.init({});
        
-       function sendSC(json) {
- 
-         var cmdName = lpTag.agentSDK.cmdNames.writeSC;
-         var data = {json:json};
- 
-         lpTag.agentSDK.command(cmdName, data, function (err) {
-             outputLog.value = err ? err : 'done';
-         });
-     }
+         function sendSC(json) {
+            var cmdName = lpTag.agentSDK.cmdNames.writeSC;
+            var data = {json:json};
+            lpTag.agentSDK.command(cmdName, data, function (err) {
+               outputLog.value = err ? err : 'done';
+            });
+         }
        
        
  	    
  
-      $(document).on('click', function(evt) {
+         $(document).on('click', function(evt) {
            if($(evt.target).is('#sendMap')) {
- 		  var FreeTextMap = $( "#FreeTextMap" ).val();
- 		  InterceptedLat = Number($( "#Latitude" ).val());
- 		  InterceptedLong = Number($( "#Longitude" ).val());
- 		  var DataMap = {
- 			"type": "vertical",
- 			"elements": [{
- 				"type": "map",
- 				"lo": InterceptedLong,
- 				"la": InterceptedLat,
- 				"click": {
- 					"actions": [{
- 						"type": "navigate",
- 						"lo": InterceptedLong,
- 						"la": InterceptedLat
- 					}]
- 				},
- 				"tooltip": "map tooltip"
- 			},
- 			{
- 				"type": "text",
- 				"text": FreeTextMap,
- 				"tooltip": "text tooltip",
- 				"rtl": true
- 			}
- 		]};
-         }
- 	sendSC(DataMap);
-     });
+ 		         var FreeTextMap = $( "#FreeTextMap" ).val();
+ 		         InterceptedLat = Number($( "#Latitude" ).val());
+ 		         InterceptedLong = Number($( "#Longitude" ).val());
+ 		         var DataMap = {
+ 			         "type": "vertical",
+ 			         "elements": [{
+ 				         "type": "map",
+ 				         "lo": InterceptedLong,
+ 				         "la": InterceptedLat,
+ 				         "click": {
+ 					         "actions": [{
+ 						         "type": "navigate",
+ 						         "lo": InterceptedLong,
+ 						         "la": InterceptedLat
+ 					         }]
+ 				         },
+ 				         "tooltip": "map tooltip"
+ 			         },
+ 			         {
+ 				         "type": "text",
+ 				         "text": FreeTextMap,
+ 				         "tooltip": "text tooltip",
+ 				         "rtl": true
+ 			         }
+ 		         ]};
+             }
+ 	          sendSC(DataMap);
+          });
  	    
  	    
- 	$(document).on('click', function(evt) {
-           if($(evt.target).is('#sendCard')) {
- 		  var ImageCard = $( "#ImageCard" ).val();
- 		  var URLCard = $( "#URLCard" ).val();
- 		  var FreeTextCard = $( "#FreeTextCard" ).val();
- 		  var FreeTextToURL = $( "#FreeTextToURL" ).val();
- 		  var DataCard = {
- 			"type": "vertical",
- 			"elements": [{
- 				"type": "image",
- 				"url": ImageCard,
- 				"tooltip": "image tooltip"
- 			},
- 			{
- 				"type": "text",
- 				"text": FreeTextCard,
- 				"tooltip": "brand new iphone 8",
- 				"style": {
- 					"bold": true,
- 					"size": "large"
- 				}
- 			},
- 			{
- 				"type": "button",
- 				"title": FreeTextToURL,
- 				"click": {
- 					"actions": [{
- 						"type": "link",
- 						"uri": URLCard
- 					}]
- 				}
- 			}
- 		]}
-         }
- 	sendSC(DataCard);
-     });
+ 	       $(document).on('click', function(evt) {
+               if($(evt.target).is('#sendCard')) {
+ 		               var ImageCard = $( "#ImageCard" ).val();
+ 		               var URLCard = $( "#URLCard" ).val();
+ 		               var FreeTextCard = $( "#FreeTextCard" ).val();
+ 		               var FreeTextToURL = $( "#FreeTextToURL" ).val();
+ 		               var DataCard = {
+ 			               "type": "vertical",
+ 			               "elements": [{
+ 				               "type": "image",
+ 				               "url": ImageCard,
+ 				               "tooltip": "image tooltip"
+ 			               },
+ 			               {
+ 				               "type": "text",
+ 				               "text": FreeTextCard,
+ 				               "tooltip": "brand new iphone 8",
+ 				               "style": {
+ 					               "bold": true,
+ 					               "size": "large"
+ 				               }
+ 			               },
+ 			               {
+ 				               "type": "button",
+ 				               "title": FreeTextToURL,
+ 				               "click": {
+ 					               "actions": [{
+ 						               "type": "link",
+ 						               "uri": URLCard
+ 					               }]
+ 				               }
+ 			               }
+ 		               ]}
+                 }
+ 	              sendSC(DataCard);
+           });
        
  	    
  	    
- 	$(document).on('click', function(evt) {
-           if($(evt.target).is('#sendVideo')) {
- 		  var URLImage = $( "#URLImage" ).val();
- 		  var URLVideo = $( "#URLVideo" ).val();
- 		  var FreeTextVideo = $( "#FreeTextVideo" ).val();
- 		  var DataVideo = {
- 			"type": "vertical",
- 			"elements": [{
- 				"type": "image",
- 				"url": URLImage,
- 				"tooltip": "image tooltip",
- 				"click": {
- 					"actions": [{
- 						"type": "link",
- 						"uri": URLVideo
- 					}]
- 				}
- 			},
- 			{
- 				"type": "text",
- 				"text": FreeTextVideo
- 			}
- 		]}
-         }
- 	sendSC(DataVideo);
-     });
+ 	        $(document).on('click', function(evt) {
+               if($(evt.target).is('#sendVideo')) {
+ 		               var URLImage = $( "#URLImage" ).val();
+ 		               var URLVideo = $( "#URLVideo" ).val();
+ 		               var FreeTextVideo = $( "#FreeTextVideo" ).val();
+ 		               var DataVideo = {
+ 			               "type": "vertical",
+ 			               "elements": [{
+ 				               "type": "image",
+ 				               "url": URLImage,
+ 				               "tooltip": "image tooltip",
+ 				               "click": {
+ 					               "actions": [{
+ 						               "type": "link",
+ 						               "uri": URLVideo
+ 					               }]
+ 				               }
+ 			               },
+ 			               {
+ 				               "type": "text",
+ 				               "text": FreeTextVideo
+ 			               }
+ 		               ]}
+                 }
+ 	              sendSC(DataVideo);
+            });
        	    
  	    
  	
