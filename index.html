@@ -171,9 +171,8 @@
  
  	$("document").ready(function() {
            setTimeout(function() {
-              var mybutton = document.getElementsByClassName("tabMap");
-              mybutton.className = "active";
-              alert(mybutton.className);
+              var mybutton = document.getElementById("buttonMap");
+              mybutton.className += " active";
               $(".tabMap").trigger('click');
            },10);
          });
@@ -421,9 +420,9 @@
      
  
  <div class="tab">
-   <button class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
-   <button class="tablinks tabCard" onclick="openContent(event, 'Card')">Card</button>
-   <button class="tablinks tabVideo" onclick="openContent(event, 'Video')">Video</button>
+   <button id="buttonMap" class="tablinks tabMap" onclick="openContent(event, 'Map')">Map</button>
+   <button id="buttonCard" class="tablinks tabCard" onclick="openContent(event, 'Card')">Card</button>
+   <button id="buttonVideo" class="tablinks tabVideo" onclick="openContent(event, 'Video')">Video</button>
  </div>
  
  <div id="Map" class="tabcontent">
