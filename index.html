@@ -171,6 +171,8 @@
  	$("document").ready(function() {
            setTimeout(function() {
               $(".tabMap").trigger('click');
+              var mybutton = document.getElementsByClassName("tabMap");
+              mybutton.className = mybutton.className.replace(" active", "");
            },10);
          });
  function openContent(evt, contentType) {
